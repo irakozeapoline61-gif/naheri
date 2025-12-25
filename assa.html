@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Book</title>
+
+<style>
+body{
+    font-family: "Times New Roman", serif;
+    background:#eaeaea;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.book{
+    width:500px;
+    background:white;
+    padding:30px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    border-radius:8px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+h1,h2{
+    text-align:center;
+}
+
+.buttons{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    background:#2c7be5;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:disabled{
+    background:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<div class="book">
+
+    <div class="page active">
+        <h1>MY BOOK</h1>
+        <p><b>Author:</b> Laurence</p>
+        <p>This is the cover page of the book.</p>
+    </div>
+
+    <div class="page">
+        <h2>Chapter 1</h2>
+        <p>
+            This is chapter one of the book.
+            You can write stories, lessons,
+            or research content here.
+        </p>
+    </div>
+
+    <div class="page">
+        <h2>Chapter 2</h2>
+        <p>
+            This is chapter two.
+            Add more text as your book grows.
+        </p>
+    </div>
+
+    <div class="page">
+        <h2>Conclusion</h2>
+        <p>
+            This is the last page of the book.
+            Thank you for reading.
+        </p>
+    </div>
+
+    <div class="buttons">
+        <button id="prev">Previous</button>
+        <button id="next">Next</button>
+    </div>
+
+</div>
+
+<script>
+let pages = document.querySelectorAll(".page");
+let currentPage = 0;
+
+function showPage(index){
+    pages.forEach(page => page.classList.remove("active"));
+    pages[index].classList.add("active");
+
+    document.getElementById("prev").disabled = index === 0;
+    document.getElementById("next").disabled = index === pages.length - 1;
+}
+
+document.getElementById("next").onclick = () => {
+    if(currentPage < pages.length - 1){
+        currentPage++;
+        showPage(currentPage);
+    }
+};
+
+document.getElementById("prev").onclick = () => {
+    if(currentPage > 0){
+        currentPage--;
+        showPage(currentPage);
+    }
+};
+
+showPage(currentPage);
+</script>
+
+</body>
+</html>
